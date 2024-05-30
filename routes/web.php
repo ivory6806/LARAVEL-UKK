@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShopController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
@@ -23,8 +22,6 @@ use App\Http\Controllers\BarangKeluarController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resource('shop', ShopController::class);
 
 Route::resource('barang', BarangController::class)->middleware('auth');
 Route::resource('kategori', KategoriController::class);

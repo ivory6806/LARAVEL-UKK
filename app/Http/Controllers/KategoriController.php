@@ -145,4 +145,45 @@ class KategoriController extends Controller
 
         }
     }
+
+    //menampilkan semua kategori
+    public function kategoriAPI(){
+        $kategori = Kategori::all();
+        return response()->json(['data' => $kategori]);
+    }
+
+    //menampilkan salah satu kategori
+    public function ShowKategoriAPI($id){
+        $satukategori = Kategori::find($id);
+        if (!$satukategori) {
+            return response()->json(['message' => 'Kategori tidak ditemukan'], 404);
+        }
+        return response()->json(['data' => $satukategori]);
+    }
+
+    //mengupdate kategori
+    public function UpdateKategoriAPI(Request $request, $id) {
+        $kategori = Kategori::find($id);
+        if (!$kategori) {
+            return response()->json(['message' => 'Kategori tidak ditemukan'], 404);
+        }
+
+        $kategori->deskripsi=$request->deskripsi;
+        $kategori->kategori=$request->kategori;
+        $kategori->save();
+
+        return response()->json(['message' => 'Kategori berhasil diubah'], 200);          
+    }
+
+    //menghapus kategori
+    public function DeleteKategoriAPI($id){
+        $kategori = Kategori::find($id);
+        if (!$kategori) {
+            return response()->json(['message' => 'Kategori tidak ditemukan'], 404);
+        }
+
+        $kategori->delete();
+        return response()->json(['message' => 'Kategori berhasil dihapus'], 200);   
+    }
+
 }
